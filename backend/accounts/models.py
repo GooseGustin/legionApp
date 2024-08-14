@@ -9,7 +9,9 @@ status_options = {
 
 class Legionary(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20, choices=status_options)
+    status = models.CharField(
+        max_length=20, choices=status_options, 
+        default='non-manager')
     curia_managed = models.ForeignKey(
         Curia, on_delete=models.SET_NULL, null=True,
         related_name='managers')
@@ -18,4 +20,4 @@ class Legionary(models.Model):
         return self.status == 'manager'
     
     def __str__(self):
-        return "Legionary " + self.user.username
+        return "Legionary_" + self.user.username

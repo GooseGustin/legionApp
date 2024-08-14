@@ -19,7 +19,6 @@ class Report(models.Model):
     no_meetings_held = models.IntegerField()
     avg_attendance = models.IntegerField()
     poor_attendance_reason = models.TextField()
-    
 
 class FunctionAttendance(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
@@ -27,7 +26,6 @@ class FunctionAttendance(models.Model):
     date = models.DateField()
     current_year_attendance = models.IntegerField()
     previous_year_attandance = models.IntegerField()
-
 
 class MembershipDetails(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
@@ -38,7 +36,6 @@ class MembershipDetails(models.Model):
     auxiliary_members = models.IntegerField()
     adjutorian_members = models.IntegerField()
     praetorian_members = models.IntegerField()
-
 
 class Achievement(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)

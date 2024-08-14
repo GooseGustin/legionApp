@@ -13,6 +13,7 @@ class Curia(models.Model):
 
 
 class Announcement(models.Model):
+    curia = models.ForeignKey(Curia, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=100)
     body = models.TextField()
