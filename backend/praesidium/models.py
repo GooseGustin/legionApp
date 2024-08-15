@@ -27,5 +27,8 @@ class Praesidium(models.Model):
         return self.name + '_praesidium'
 
 class Reminder(models.Model):
+    praesidium = models.ForeignKey(
+        Praesidium, on_delete=models.CASCADE
+    )
     content = models.TextField()
     deadline = models.DateField()

@@ -9,7 +9,8 @@ class Work(models.Model):
     active = models.BooleanField()
     done = models.BooleanField()
     details = models.JSONField(default=dict)
-    meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE)
+    meeting = models.ForeignKey(
+        Meeting, on_delete=models.CASCADE, related_name='works')
 
     def __str__(self):
         return "Work_" + self.type 

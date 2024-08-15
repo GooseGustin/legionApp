@@ -4,11 +4,11 @@ from reports.models import Report
 
 # Create your models here.
 class Expenses(models.Model):
-    extension = models.FloatField()
-    remittance = models.FloatField()
-    stationery = models.FloatField()
-    altar = models.FloatField()
-    bouquet = models.FloatField()
+    extension = models.FloatField(default=0)
+    remittance = models.FloatField(default=0)
+    stationery = models.FloatField(default=0)
+    altar = models.FloatField(default=0)
+    bouquet = models.FloatField(default=0)
     others = models.JSONField(default=dict)
 
 class AcctStatement(models.Model):
@@ -28,6 +28,7 @@ class FinancialRecord(models.Model):
     acct_announcement = models.OneToOneField(AcctAnnouncement, on_delete=models.CASCADE)
     
 class FinancialSummary(models.Model):
+    report = models.ForeignKey(Report, on_delete=models.CASCADE)
     abf = models.FloatField()
     sbc = models.JSONField(default=dict)
     expenses = models.JSONField(default=dict)

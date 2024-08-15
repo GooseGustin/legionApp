@@ -25,7 +25,7 @@ class FunctionAttendance(models.Model):
     name = models.CharField(max_length=50)
     date = models.DateField()
     current_year_attendance = models.IntegerField()
-    previous_year_attandance = models.IntegerField()
+    previous_year_attendance = models.IntegerField()
 
 class MembershipDetails(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
