@@ -9,18 +9,21 @@ class Expenses(models.Model):
     stationery = models.FloatField(default=0)
     altar = models.FloatField(default=0)
     bouquet = models.FloatField(default=0)
-    others = models.JSONField(default=dict)
+    others = models.JSONField(default=dict, null=True, blank=True)
+
+    class Meta: 
+        verbose_name_plural = 'expenses'
 
 class AcctStatement(models.Model):
-    acf = models.FloatField()
-    sbc = models.FloatField()
-    balance = models.FloatField()
+    acf = models.FloatField(default=0)
+    sbc = models.FloatField(default=0)
+    balance = models.FloatField(default=0)
     expenses = models.OneToOneField(Expenses, on_delete=models.CASCADE)
 
 class AcctAnnouncement(models.Model):
-    sbc = models.FloatField()
-    collection_1 = models.FloatField()
-    collection_2 = models.FloatField()
+    sbc = models.FloatField(default=0)
+    collection_1 = models.FloatField(null=True, blank=True)
+    collection_2 = models.FloatField(null=True, blank=True)
 
 class FinancialRecord(models.Model):
     meeting = models.OneToOneField(Meeting, on_delete=models.CASCADE)
@@ -29,7 +32,10 @@ class FinancialRecord(models.Model):
     
 class FinancialSummary(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
-    abf = models.FloatField()
-    sbc = models.JSONField(default=dict)
-    expenses = models.JSONField(default=dict)
-    report_production = models.FloatField()
+    abf = models.FloatField(default=0) # from beginning year
+    sbc = models.JSONField(default=dict, null=True, blank=True)
+    expenses = models.JSONField(default=dict, null=True, blank=True)
+    report_production = models.FloatField(default=0)
+
+    class Meta: 
+        verbose_name_plural = 'financial summaries'

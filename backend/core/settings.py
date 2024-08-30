@@ -46,11 +46,11 @@ INSTALLED_APPS = [
     'accounts', 
     'api',
     'curia', 
-    'finance', 
-    'meetings',
     'praesidium', 
+    'meetings',
+    'works',
+    'finance', 
     'reports', 
-    'works'
 ]
 
 MIDDLEWARE = [

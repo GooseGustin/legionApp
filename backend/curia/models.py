@@ -8,9 +8,15 @@ class Curia(models.Model):
     country = models.CharField(max_length=50, default="Nigeria")
     parish = models.CharField(max_length=100)
     spiritual_director = models.CharField(max_length=100)
+    # iden = models.CharField(max_length=20)
+    # creator = models.ForeignKey(Legionary, on_delete=models.CASCADE)
+    # created_at 
 
     def __str__(self):
         return self.name + "_curia"
+    
+    class Meta: 
+        verbose_name_plural = 'curiae'
 
 
 class Announcement(models.Model):

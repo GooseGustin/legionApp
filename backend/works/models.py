@@ -6,9 +6,9 @@ from reports.models import Report
 # Create your models here.
 class Work(models.Model):
     type = models.CharField(max_length=50)
-    active = models.BooleanField()
-    done = models.BooleanField()
-    details = models.JSONField(default=dict)
+    active = models.BooleanField(default=False)
+    done = models.BooleanField(default=False)
+    details = models.JSONField(default=dict, null=True, blank=True)
     meeting = models.ForeignKey(
         Meeting, on_delete=models.CASCADE, related_name='works')
 
@@ -17,12 +17,15 @@ class Work(models.Model):
 
 class WorkSummary(models.Model):
     type = models.CharField(max_length=50)
-    active = models.BooleanField()
-    no_assigned = models.IntegerField()
-    no_done = models.IntegerField()
-    details = models.JSONField(default=dict)
+    active = models.BooleanField(default=False)
+    no_assigned = models.IntegerField(default=0)
+    no_done = models.IntegerField(default=0)
+    details = models.JSONField(default=dict, null=True, blank=True)
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
+
+    class Meta: 
+        verbose_name_plural = 'work summaries'
 
 class WorkList(models.Model):
     praesidium = models.OneToOneField(Praesidium, on_delete=models.CASCADE)
-    details = models.JSONField(default=list)
+    details = models.JSONField(default=dict)

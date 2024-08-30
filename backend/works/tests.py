@@ -157,17 +157,3 @@ class WorkTest(TestCase):
         self.assertEqual(ws.report, self.report) 
         self.assertEqual(ws.details['No of people visited'], 3)
         self.assertTrue(ws.active) 
-
-
-
-# class WorkSummary(models.Model):
-#     type = models.CharField(max_length=50)
-#     active = models.BooleanField()
-#     no_assigned = models.IntegerField()
-#     no_done = models.IntegerField()
-#     details = models.JSONField(default=dict)
-#     report = models.ForeignKey(Report, on_delete=models.CASCADE)
-
-# class WorkList(models.Model):
-#     praesidium = models.OneToOneField(Praesidium, on_delete=models.CASCADE)
-#     details = models.JSONField(default=list)
