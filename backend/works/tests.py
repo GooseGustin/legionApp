@@ -8,7 +8,7 @@ from datetime import date
 from curia.models import Curia 
 
 def getIden(name):
-    letters = [i[0] for i in name.split(' ')]
+    letters = [i[0] for i in name.split(" ")]
     pepper = [str(randint(0,50)) for _ in range(3)]
     letters.extend(pepper) 
     shuffle(letters)
@@ -62,7 +62,7 @@ class WorkTest(TestCase):
             submission_date=sub_date, 
             last_submission_date=last_sub_date, 
             report_number=3, 
-            report_period=(sub_date-last_sub_date), # .days,
+            report_period=(sub_date-last_sub_date).days,
             last_curia_visit_date=date(2023, 12, 2), 
             last_curia_visitors=[
                 'Bro Julius Pwajok',
@@ -97,13 +97,13 @@ class WorkTest(TestCase):
             active=True, 
             done=True, 
             details={
-                'No of people visited': 13, 
-                'No of active Catholics': 7, 
-                'No of inactive Catholics': 2, 
-                'No of separated brethren': 4, 
-                'No of catechumen': 0, 
-                'No of muslims': 0, 
-                'No of unknowns': 0
+                "No of people visited": 13, 
+                "No of active Catholics": 7, 
+                "No of inactive Catholics": 2, 
+                "No of separated brethren": 4, 
+                "No of catechumen": 0, 
+                "No of muslims": 0, 
+                "No of unknowns": 0
             }, 
             meeting=self.meet
         )
@@ -120,19 +120,19 @@ class WorkTest(TestCase):
         wl1 = WorkList.objects.create(
             praesidium=self.praes, 
             details = {
-                'Home visitation': [
-                    'No of people visited', 
-                    'No of active Catholics', 
-                    'No of inactive Catholics', 
-                    'No of separated brethren', 
-                    'No of catechumen', 
-                    'No of muslims', 
-                    'No of unknowns'
+                "Home visitation": [
+                    "No of homes visited", 
+                    "No of active Catholics", 
+                    "No of inactive Catholics", 
+                    "No of separated brethren", 
+                    "No of catechumen", 
+                    "No of muslims", 
+                    "No of unknowns"
                 ]
             }
         )
         self.assertEqual(wl1.praesidium, self.praes)
-        self.assertIn('No of muslims', wl1.details['Home visitation'])
+        self.assertIn("No of muslims", wl1.details["Home visitation"])
         # print(self.meet.works) /
 
 
@@ -144,16 +144,16 @@ class WorkTest(TestCase):
             no_assigned=20, 
             no_done=15, 
             details={
-                'No of people visited': 3, 
-                'No of active Catholics': 1, 
-                'No of inactive Catholics': 0, 
-                'No of separated brethren': 1, 
-                'No of catechumen': 1, 
-                'No of muslims': 0, 
-                'No of unknowns': 0
+                "No of people visited": 3, 
+                "No of active Catholics": 1, 
+                "No of inactive Catholics": 0, 
+                "No of separated brethren": 1, 
+                "No of catechumen": 1, 
+                "No of muslims": 0, 
+                "No of unknowns": 0
             }
         )
 
         self.assertEqual(ws.report, self.report) 
-        self.assertEqual(ws.details['No of people visited'], 3)
+        self.assertEqual(ws.details["No of people visited"], 3)
         self.assertTrue(ws.active) 

@@ -23,6 +23,9 @@ class Report(models.Model):
     avg_attendance = models.IntegerField(default=0)
     poor_attendance_reason = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return "Report " + str(self.report_number) + " of " + self.praesidium.name
+
 class FunctionAttendance(models.Model):
     report = models.ForeignKey(Report, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)

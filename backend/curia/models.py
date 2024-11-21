@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import Legionary
 
 # Create your models here.
 # Does the curia need a parish? Yes? for specification
@@ -8,9 +9,11 @@ class Curia(models.Model):
     country = models.CharField(max_length=50, default="Nigeria")
     parish = models.CharField(max_length=100)
     spiritual_director = models.CharField(max_length=100)
-    # iden = models.CharField(max_length=20)
-    # creator = models.ForeignKey(Legionary, on_delete=models.CASCADE)
-    # created_at 
+    iden = models.CharField(max_length=20)
+    creator = models.ForeignKey(Legionary, on_delete=models.CASCADE)
+    managers = models.ManyToManyField(Legionary)
+    management_requests = models.ManytoManyField(Legionary)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name + "_curia"
@@ -27,4 +30,4 @@ class Announcement(models.Model):
     image = models.ImageField(upload_to='images/curia/')
 
     def __str__(self):
-        return self.name[:20]
+        return self.title[:20]

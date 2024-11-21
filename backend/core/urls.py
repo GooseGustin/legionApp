@@ -21,11 +21,5 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('accounts.urls')),
-    path('', include('curia.urls')),
-    path('', include('meetings.urls')),
-    path('', include('works.urls')),
-    path('', include('reports.urls')),
-    path('', include('praesidium.urls')),
-    path('', include('finance.urls')),
+    path('api/', include('api.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

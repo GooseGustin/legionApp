@@ -60,7 +60,7 @@ class MeetingTest(TestCase):
             submission_date=sub_date, 
             last_submission_date=last_sub_date, 
             report_number=3, 
-            report_period=(sub_date-last_sub_date), # .days,
+            report_period=(sub_date-last_sub_date).days,
             last_curia_visit_date=date(2023, 12, 2), 
             last_curia_visitors=[
                 'Bro Julius Pwajok',

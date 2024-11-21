@@ -10,7 +10,7 @@ class Praesidium(models.Model):
     parish = models.CharField(max_length=50)
     curia = models.ForeignKey(Curia, on_delete=models.CASCADE)
     iden = models.CharField(max_length=20)
-    address = models.CharField(max_length=50, default='')
+    address = models.CharField(max_length=100, default='')
     meeting_time = models.CharField(max_length=100)
     inaug_date = models.DateField(null=True, blank=True)
     president = models.CharField(max_length=100)
@@ -22,12 +22,12 @@ class Praesidium(models.Model):
     treasurer = models.CharField(max_length=100)
     tres_app_date = models.DateField(null=True, blank=True)
     managers = models.ManyToManyField(Legionary)
-    # members = models.ManyToManyField(Legionary)
-    # membership_requests = models.ManytoManyField(Legionary)
-    # next_report_deadline = models.DateField(null=True, blank=True)
-    # created_at 
-    # premium_status = models.BooleanField(default=False)
-    # premium_status_deadline = models.DateField(null=True) 
+    members = models.ManyToManyField(Legionary)
+    membership_requests = models.ManytoManyField(Legionary)
+    management_requests = models.ManytoManyField(Legionary)
+    next_report_deadline = models.DateField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return self.name + '_praesidium'

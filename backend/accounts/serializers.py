@@ -1,17 +1,33 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from .models import Legionary
 
-class UserSerializer(serializers.Serializer):
-    username = serializers.CharField(read_only=True)
-    email = serializers.EmailField(read_only=True)
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "username", "email", "password"]
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def create(self, validated_data):
+        # Create the user; the signal will handle Legionary creation
+        return User.objects.create_user(**validated_data)
+
 
 class LegionarySerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+    user = UserSerializer()
 
     class Meta: 
         model = Legionary        
         fields = [
             'user', 
             'status', 
-            'curia_managed', 
         ]
+
+    def create(self, validated_data):
+        user_data = validated_data.pop('user')
+        # Use UserSerializer to create user instead of directly creating User
+        user = UserSerializer().create(user_data)
+        
+        # Create Legionary and link it to the created user
+        legionary = Legionary.objects.create(user=user, **validated_data)
+        return legionary

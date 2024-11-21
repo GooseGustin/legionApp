@@ -1,26 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
-from curia.models import Curia 
-# from praesidium.models import Praesidium
 
-# Create your models here.
-status_options = {
-    'manager':'manager', 'non-manager': 'non-manager'
-}
+STATUS_OPTIONS = [
+    ('manager', 'Manager'),
+    ('non-manager', 'Non-Manager'),
+]
 
 class Legionary(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     status = models.CharField(
-        max_length=20, choices=status_options, default='non-manager')
-    curia_managed = models.ForeignKey(Curia, 
-        on_delete=models.SET_NULL, null=True, related_name='managers')
-    # can_post = models.BooleanField(default=False)
+        max_length=20, choices=STATUS_OPTIONS, default='non-manager'
+    )
+    premium_status = models.BooleanField(default=False)
+    premium_status_deadline = models.DateField(null=True)
 
-    def isManager(self):
-        return self.status == 'manager'
-    
     def __str__(self):
         return "Legionary_" + self.user.username
-    
+
     class Meta: 
         verbose_name_plural = 'legionaries'

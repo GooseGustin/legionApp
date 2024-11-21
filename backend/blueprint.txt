@@ -1,0 +1,415 @@
+Project Blueprint
+______________________________________________
+DESIGN
+    - Legionary
+        1. A Legionary is created with the creation of a new user 
+        2. A Legionary can request for membership in a praesidium 
+        3. Legionaries can ask and answer questions
+        4. Legionaries can make prayer requests on the prayer wall
+        5. Legionaries can become curia and praesidia managers
+
+    - Curia
+        1. A Legionary should be able to create a curia and becomes the creator of the curia and first manager 
+        2. The curia has the following additional features: name, state, country, parish, spiritual_director, management_requests, created_at 
+        3. A Legionary can request to be a curia's manager by entering the curia id and requesting to be a manager. He is added to the management_requests list for approval'
+        4. Any manager can view and approve the request and make the Legionary a manager of that curia 
+        5. Any manager can remove another manager from curia management
+        6. Managers can edit the details of the curia
+
+    - Praesidium
+        1. A Legionary can create a Praesidium, becoming the first manager
+        2. Properties of a praesidium are: 
+            'name', 'state', 'country', 'parish', 'curia', 
+            'iden', 'address', 'meeting_time', 'inaug_date', 
+            'president', 'pres_app_date', 'vice_president', 
+            'vp_app_date', 'secretary', 'sec_app_date', 
+            'treasurer', 'tres_app_date', 'managers', 'members',
+            'membership_requests', 'next_report_deadline', 'created_at'
+        3. A Legionary can request to be a manager of a praesidium. Any manager can approve the request
+        4. Managers can edit the details of the praesidium, add meetings records, set reminders, create reports, set works, etc
+        5. Legionaries can request to be members of the praesidium. Membership will be approved by any existing manager
+        6. Members can view praesidium details, meetings, reminders and reports, but not edit
+
+    - Work 
+        1. There should be a Work model for Meetings
+        2. There should be a WorkSummary model for Report generation
+        3. There should be a WorkList to save the types of work that the Praesidium carries out so that when the manager wants to record a Meeting, he can simply go to the types of work the praesidium does rather than the whole list of work types. This will be a field of the Praesidium model to be added when the Praesidium is created and can be edited or extended.
+        4. Work model features: Type (char), Details (JSON), Active (bool), Done (bool). The details are going to be the metrics recorded for the particular work because different works might have different metrics, eg, for home visitation, the metrics would be name of hospital, number of patients, number of active catholics, number of inactive catholics, number of separated brethren, etc. The active field is to indicate whether or not the work is considered an active work. The done field is to indicate whether or not the assigned work was completed.
+        5. WorkSummary model features: Type (char), Number assigned (int), Number done (int), Details (JSON). The details here will have the same key names as the works whose values are integers. Their values will be the sum of the work details' values.
+        6. WorkList (of Praesidium) will be a TextField
+        - When summarizing work in WorkSummary, consider using signals or scheduled tasks to automatically generate summaries after each meeting is recorded.
+______________________________________________
+PRICING PLANS
+    - Free plan features: 
+        - *Easy meeting and financial record keeping and storage
+        - *Community with other legionaries
+        - *Ability for Curia to make announcements to all Praesidia under it
+        - Reminders and Curia notifications
+        - Legion handbook online 
+        - Multiple praesidium and curia managers
+    - Basic plan features (N650): 
+        - *Free plan features 
+        - Discounted quarterly report generation (N500) without error-checking
+        - *Annual report generation with error-checking
+    - Premium plan features (N800):
+        - *Basic plan features 
+        - Advanced analytics and weekly error checking
+        - Custom exports
+______________________________________________
+MODELS
+    1. **User** (extends Django’s built-in User model)
+        - Name
+        - Email
+        - Password
+
+    2. **Praesidium**
+        - Name
+        - State
+        - Parish
+        - Curia Name
+        - Address
+        - Meeting Time
+        - Inauguration Date
+        - Spiritual Director (related to Curia)
+        - President (related to User)
+        - Vice President (related to User)
+        - Secretary (related to User)
+        - Treasurer (related to User)
+
+    3. **Curia**
+        - Name
+        - Address
+        - Spiritual Director (related to User)
+
+    4. **Meeting**
+        - Date
+        - Praesidium (ForeignKey to Praesidium)
+        - Number of Members
+        - Financial Records (OneToOne to FinancialRecord)
+        - Works Done (ManyToMany to Work)
+
+    5. **FinancialRecord**
+        - SBC
+        - Carried Amount
+        - Collection 2
+        - Collection 3
+        - Date
+        - Meeting (ForeignKey to Meeting)
+
+    6. **Work**
+        - Type (e.g., Home Visitation, Hospital Visitation, etc.)
+        - Number Assigned
+        - Number Done
+        - Details (ForeignKey to WorkDetail)
+
+    7. **WorkDetail**
+        - Homes/Patients/Inmates Visited
+        - Active Catholics
+        - Inactive Catholics
+        - Separated Brethren
+        - Muslims
+        - Unknowns
+        - Catechumen
+        - Average Number per Meeting/Mass
+
+    8. **Report**
+        - Date of Submission
+        - Date of Last Submission
+        - Period of Report
+        - Date of Last Visit by Curia
+        - Names of Visitors
+        - Curia Attendance (OneToMany to MeetingAttendanceDetail)
+        - Praesidium Attendance (OneToMany to MeetingAttendanceDetail)
+        - Membership Details (OneToOne to MembershipDetail)
+        - Meeting and Attendance Details (OneToOne to MeetingAttendanceDetail)
+        - Active Works Undertaken (ManyToMany to Work)
+        - Other Works Undertaken (ManyToMany to Work)
+        - Achievements (ForeignKey to Achievement)
+        - Plans for Extension
+        - Attendance to Legion Functions
+        - Financial Summary (OneToOne to FinancialSummary)
+        - Problems
+        - Comments/Remarks
+        - Praesidium (ForeignKey to Praesidium)
+
+    9. **MembershipDetail**
+        - Senior Praesidia Affiliated
+        - Junior Praesidia Affiliated
+        - Auxiliary Members
+        - Active Members
+        - Praetorian Members
+        - Trial Members
+
+    10. **MeetingAttendance**
+        - Office 
+        - Number of Meetings for the Period
+        - Attendance for Current Year
+        - Attendance for Previous Year
+
+    10.2. **FunctionAttendance**
+        - Function Name
+        - Date 
+        - Current Year Attendance 
+        - Previous Year Attendance 
+
+    11. **MeetingAttendanceDetail**
+        - Expected Meetings
+        - Average Attendance per Meeting
+        - Reason for Poor Attendance
+
+    12. **Achievement**
+        - Recruited into Legion
+        - Baptized
+        - Confirmed
+        - First Holy Communion
+
+    13. **FinancialSummary**
+        - Amount Brought Forward
+        - SBC (Dictionary field for each month)
+        - Expenditure (Dictionary field for each month)
+        - Monthly Remittance to Curia (Dictionary field for each month)
+        - Extension/Visitation Expenses (Dictionary field for each month)
+        - Report Production
+
+    14. **Reminder**
+    15. **Announcement**
+______________________________________________
+VIEWS
+
+    1. **Authentication Views**
+    - Register
+    - Login
+    - Logout
+
+    2. **Praesidium Views**
+    - Create Praesidium
+    - Update Praesidium
+    - Link to Curia
+
+    3. **Meeting Views**
+    - Create Meeting
+    - Update Meeting
+    - View Meetings
+
+    4. **FinancialRecord Views**
+    - Create Financial Record
+    - Update Financial Record
+
+    5. **Work Views**
+    - Create Work
+    - Update Work
+
+    6. **Report Views**
+   - Generate Report
+   - View Report
+   - Edit Report
+   - Submit Report
+______________________________________________
+PAGES
+
+    1. **Home Page**
+        - Introduction to LegionReports
+        - Features Overview
+        - Sign Up / Log In Links
+
+    2. **Dashboard**
+        - Overview of Praesidium Activities
+        - Quick Links to Meetings, Financial Records, Reports
+
+    3. **Praesidium Profile Page**
+        - Praesidium Details
+        - List of Meetings
+        - List of Reports
+
+    4. **Meeting Page**
+        - Create New Meeting
+        - View and Edit Existing Meetings
+
+    5. **Financial Records Page**
+        - Create New Financial Record
+        - View and Edit Existing Financial Records
+
+    6. **Works Page**
+        - Create New Work
+        - View and Edit Existing Works
+
+    7. **Report Page**  
+        - Generate New Report
+        - View Existing Reports
+        - Edit Reports
+        - Submit Reports
+______________________________________________
+RELATIONSHIPS
+
+    - A **User** can be linked to multiple **Praesidium** roles (President, Vice President, Secretary, Treasurer).
+    - A **Praesidium** can have multiple **Meetings**.
+    - A **Meeting** has one **FinancialRecord**.
+    - A **Meeting** can have multiple **Works**.
+    - A **Work** can have multiple **WorkDetails**.
+    - A **Report** is linked to a **Praesidium** and can have multiple **Work** records.
+    - A **Curia** can be linked to multiple **Praesidia**.
+
+    By following this design, you can ensure that all the functionalities and relationships you outlined are properly implemented in the application. This should provide a solid foundation for developing "LegionReports".
+
+______________________________________________
+PROJECT APPS
+
+    Dividing your project into Django apps helps in organizing the codebase, making it more maintainable and scalable. Based on the features and requirements, here's a suggested structure for dividing the project into Django apps:
+
+    ### Suggested Django Apps
+
+    1. **accounts**: Handles user authentication and profile management.
+    2. **praesidium**: Manages praesidium details and related functionalities.
+    3. **curia**: Manages curia details and linking praesidia to curia.
+    4. **meetings**: Handles meeting records, including financial records and member attendance.
+    5. **works**: Manages different types of works undertaken by praesidia.
+    6. **reports**: Generates and manages reports for praesidia activities and finances.
+    7. **finance**: Manages financial summaries and records, including income and expenditure.
+
+    ### App Details
+
+    #### 1. **accounts**
+    - **Models**: User (extends Django's built-in User model)
+    - **Views**: Register, Login, Logout, Profile
+    - **Templates**: register.html, login.html, profile.html
+
+    #### 2. **praesidium**
+    - **Models**: Praesidium
+    - **Views**: Create Praesidium, Update Praesidium, Link to Curia, Praesidium Dashboard
+    - **Templates**: create_praesidium.html, update_praesidium.html, praesidium_dashboard.html
+
+    #### 3. **curia**
+    - **Models**: Curia
+    - **Views**: Create Curia, Update Curia, Link Praesidium to Curia, Curia Dashboard
+    - **Templates**: create_curia.html, update_curia.html, curia_dashboard.html
+
+    #### 4. **meetings**
+    - **Models**: Meeting, FinancialRecord
+    - **Views**: Create Meeting, Update Meeting, View Meetings
+    - **Templates**: create_meeting.html, update_meeting.html, view_meetings.html
+
+    #### 5. **works**
+    - **Models**: Work, WorkDetail
+    - **Views**: Create Work, Update Work, View Works
+    - **Templates**: create_work.html, update_work.html, view_works.html
+
+    #### 6. **reports**
+    - **Models**: Report, MembershipDetail, MeetingAttendanceDetail, Achievement, FinancialSummary
+    - **Views**: Generate Report, View Report, Edit Report, Submit Report
+    - **Templates**: generate_report.html, view_report.html, edit_report.html, submit_report.html
+
+    #### 7. **finance**
+    - **Models**: FinancialSummary (could be linked to reports or standalone)
+    - **Views**: Create Financial Summary, Update Financial Summary, View Financial Records
+    - **Templates**: create_financial_summary.html, update_financial_summary.html, view_financial_records.html
+
+______________________________________________
+PROJECT STRUCTURE
+
+Here's an example of how your project directory might look:
+
+```
+legionreports/
+    manage.py
+    legionreports/
+        __init__.py
+        settings.py
+        urls.py
+        wsgi.py
+    accounts/
+        __init__.py
+        models.py
+        views.py
+        urls.py
+        templates/
+            accounts/
+                register.html
+                login.html
+                profile.html
+    praesidium/
+        __init__.py
+        models.py
+        views.py
+        urls.py
+        templates/
+            praesidium/
+                create_praesidium.html
+                update_praesidium.html
+                praesidium_dashboard.html
+    curia/
+        __init__.py
+        models.py
+        views.py
+        urls.py
+        templates/
+            curia/
+                create_curia.html
+                update_curia.html
+                curia_dashboard.html
+    meetings/
+        __init__.py
+        models.py
+        views.py
+        urls.py
+        templates/
+            meetings/
+                create_meeting.html
+                update_meeting.html
+                view_meetings.html
+    works/
+        __init__.py
+        models.py
+        views.py
+        urls.py
+        templates/
+            works/
+                create_work.html
+                update_work.html
+                view_works.html
+    reports/
+        __init__.py
+        models.py
+        views.py
+        urls.py
+        templates/
+            reports/
+                generate_report.html
+                view_report.html
+                edit_report.html
+                all_reports.html
+                # submit_report.html
+    finance/
+        __init__.py
+        models.py
+        views.py
+        urls.py
+        templates/
+            finance/
+                create_financial_summary.html
+                update_financial_summary.html
+                view_financial_records.html
+```'
+______________________________________________
+URL Configuration
+
+Each app will have its own `urls.py` file to manage routing, and the main `urls.py` file in the `legionreports` directory will include these URLs.
+
+#### Example of `legionreports/urls.py`:
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
+    path('praesidium/', include('praesidium.urls')),
+    path('curia/', include('curia.urls')),
+    path('meetings/', include('meetings.urls')),
+    path('works/', include('works.urls')),
+    path('reports/', include('reports.urls')),
+    path('finance/', include('finance.urls')),
+]
+```
+
+By structuring your project this way, you keep each part of the application modular and easier to manage. Each app handles a specific piece of functionality, making development, testing, and maintenance more straightforward.

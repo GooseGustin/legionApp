@@ -1,0 +1,242 @@
+
+### Revised Schedule (Starting August 5th)
+
+#### Phase 1: Django Implementation and DRF Learning (August 5 - August 19)
+
+**August 5 - August 9: Django Models and Basic CRUD**
+- Finalize Django models for all features.
+- Implement basic CRUD views and templates for meetings, financial records, and report generation.
+- Write tests to ensure models work as expected.
+- Learn basics of DRF in parallel.
+
+**August 9 - August 12: Django Views and Templates**
+- Implement views and templates for user registration, login, and praesidium creation.
+- Develop views and templates for managing meetings and financial records.
+- Test the full flow of data through the application.
+- Continue learning DRF, focusing on serializers and viewsets.
+
+#### Phase 2: DRF Integration and React Basics (August 20 - September 8)
+
+**August 13 - August 20: DRF Integration**
+- Set up DRF and create serializers and viewsets for existing models.
+- Test API endpoints with Postman or similar tools.
+- Convert Django views to DRF viewsets where appropriate.
+- Learn the fundamentals of React (components, state, props, hooks).
+
+**August 21 - August 24: React Basics and Initial Integration**
+- Learn JavaScript for implementing finance checking
+- Create a basic React application.
+- Make simple API calls using `axios` and display data.
+- Integrate React frontend with DRF backend for user authentication and basic CRUD operations.
+
+**August 25 - August 31: Meeting and Financial Records in React**
+- Develop the frontend for managing meetings and financial records.
+- Implement CRUD operations in React for meetings and financial records.
+- Test the full flow from frontend to backend.
+
+#### Phase 3: Azure Deployment and Additional Features (September 9 - September 30)
+
+**September 1 - September 6: Azure Basics and Deployment Preparation**
+- Learn Azure basics: setting up an account, understanding Azure services.
+- Prepare Django and React apps for deployment.
+- Learn how to deploy a Django + React application on Azure.
+- Configure Azure App Service and Azure Database for PostgreSQL.
+
+**September 7 - September 8: Azure Deployment Execution**
+- Deploy the Django backend to Azure App Service.
+- Deploy the React frontend to Azure Static Web Apps or similar service.
+- Test the deployment to ensure everything is working correctly.
+
+**September 9 - September 20: Post-Deployment Monitoring and Fixes**
+- Monitor the deployed application for any issues.
+- Fix any deployment-related bugs.
+- Gather feedback from users about the live application.
+- Prepare marketing materials and pre-launch announcements.
+
+**September 20 - October 3: Azure Deployment Preparation**
+- Prepare Django and React apps for deployment.
+- Learn how to deploy a Django + React application on Azure.
+- Configure Azure App Service and Azure Database for PostgreSQL.
+
+**October 4 - October 7: Azure Deployment Execution**
+- Deploy the Django backend to Azure App Service.
+- Deploy the React frontend to Azure Static Web Apps or similar service.
+- Test the deployment to ensure everything is working correctly.
+
+**October 8 - October 15: Post-Deployment Monitoring and Fixes**
+- Monitor the deployed application for any issues.
+- Fix any deployment-related bugs.
+- Gather feedback from users about the live application.
+
+#### Phase 4: Social Features and Continuous Improvement (October 1 onwards)
+
+**October 16 - October 31: Social Features Basics**
+- Implement basic Q&A and blog post features.
+- Allow users to post questions and short blog entries.
+
+**November 1 - November 15: Social Features Enhancements**
+- Implement comments, upvotes, and other interactive features.
+- Improve UI/UX based on user feedback.
+
+
+#### Detailed Weekly Plan
+
+**Week 1 (August 5 - August 11): Django Models and Basic CRUD**
+- Finalize Django models for all features.
+- Implement basic CRUD views and templates for meetings, financial records, and report generation.
+- Write tests to ensure models work as expected.
+- Learn basics of DRF in parallel.
+
+**Week 2 (August 12 - August 19): Django Views and Templates**
+- Implement views and templates for user registration, login, and praesidium creation.
+- Develop views and templates for managing meetings and financial records.
+- Test the full flow of data through the application.
+- Continue learning DRF, focusing on serializers and viewsets.
+
+**Week 3 (August 20 - August 27): DRF Integration**
+- Set up DRF and create serializers and viewsets for existing models.
+- Test API endpoints with Postman or similar tools.
+- Convert Django views to DRF viewsets where appropriate.
+
+**Week 4 (August 28 - September 4): React Basics and Initial Integration**
+- Learn the fundamentals of React (components, state, props, hooks).
+- Create a basic React application.
+- Make simple API calls using `axios` and display data.
+- Integrate React frontend with DRF backend for user authentication and basic CRUD operations.
+
+**Week 5 (September 5 - September 8): Meeting and Financial Records in React**
+- Develop the frontend for managing meetings and financial records.
+- Implement CRUD operations in React for meetings and financial records.
+- Test the full flow from frontend to backend.
+
+**Week 6 (September 9 - September 15): Azure Basics and Deployment Preparation**
+- Learn Azure basics: setting up an account, understanding Azure services.
+- Prepare Django and React apps for deployment.
+- Learn how to deploy a Django + React application on Azure.
+- Configure Azure App Service and Azure Database for PostgreSQL.
+
+**Week 7 (September 16 - September 23): Azure Deployment Execution**
+- Deploy the Django backend to Azure App Service.
+- Deploy the React frontend to Azure Static Web Apps or similar service.
+- Test the deployment to ensure everything is working correctly.
+
+**Week 8 (September 24 - September 30): Post-Deployment Monitoring and Fixes**
+- Monitor the deployed application for any issues.
+- Fix any deployment-related bugs.
+- Gather feedback from users about the live application.
+- Prepare marketing materials and pre-launch announcements.
+
+**Week 9 (September 30 - October 3): Azure Deployment Preparation**
+- Prepare Django and React apps for deployment.
+- Learn how to deploy a Django + React application on Azure.
+- Configure Azure App Service and Azure Database for PostgreSQL.
+
+**Week 10 (October 4 - October 7): Azure Deployment Execution**
+- Deploy the Django backend to Azure App Service.
+- Deploy the React frontend to Azure Static Web Apps or similar service.
+- Test the deployment to ensure everything is working correctly.
+
+**Week 11 (October 8 - October 15): Post-Deployment Monitoring and Fixes**
+- Monitor the deployed application for any issues.
+- Fix any deployment-related bugs.
+- Gather feedback from users about the live application.
+
+**Post-Launch (October 16 onwards): Social Features and Improvements**
+- Implement social features (Q&A, blog posts, comments).
+- Continuously improve based on user feedback and needs.
+
+### Key Learning Resources
+
+**Django REST Framework**
+- Official DRF Tutorial: https://www.django-rest-framework.org/tutorial/quickstart/
+- DRF Course on Udemy or Coursera
+
+**React**
+- Official React Documentation: https://reactjs.org/docs/getting-started.html
+- React Course on Udemy or Coursera
+
+**Axios**
+- Axios Documentation: https://axios-http.com/docs/intro
+
+**Azure**
+- Microsoft Learn: https://docs.microsoft.com/en-us/learn/
+- Azure App Service Documentation: https://docs.microsoft.com/en-us/azure/app-service/
+- Azure Database for PostgreSQL Documentation: https://docs.microsoft.com/en-us/azure/postgresql/
+
+**Deployment**
+- Render Deployment Guide: https://render.com/docs/deploy-django
+- Azure Deployment Guide: https://docs.microsoft.com/en-us/azure/developer/python/tutorial-deploy-app-service-on-linux-01
+
+This adjusted schedule allows for a comprehensive learning path, proper development time, and a phased approach to deployment and user testing, ensuring a stable and well-tested MVP launch.
+###
+STORY: 
+- I want to be able to sign up with a praesidium account:
+    - enter name of praesidium
+    - enter state
+    - enter parish 
+    - enter curia name 
+    - enter address
+    - enter time of meeting
+    - enter date of inauguration
+- I want to be able to log in and out of the app 
+- I want to be able to enter each meeting's financial records: SBC, carried amount, Collection 2, Collection 3, etc
+- I want to be able to record teh number of members for each meeting
+- I want to be able to enter the works done or undone
+- I want praesidium accounts to be able to link to their curias' accounts 
+- I want to be able to generate a complete report:
+    - financial records will be autochecked for errors
+    - errors/inconsistencies will be flagged in red 
+    - audited records will be highlighted green
+    - forms will allow entry of:
+        - date of report submission
+        - date of last report submission
+        - period of report 
+        - date of last visit by curia and names of visitors
+        - spiritual director (provided by curia account) 
+        - president [name, date of election, term]
+        - vice president [name, date of election, term]
+        - secretary [name, date of election, term] 
+        - treasurer [name, date of election, term] 
+        - curia attendance: 
+            - number of meetings attended
+            - total meetings for the period
+            - attendance for previous year 
+        - praesidium attendance: 
+            - number of meetings attended
+            - total meetings for the period
+            - attendance for previous year 
+        - Membership: 
+            - No of praesidia affiliated: [senior, junior]
+            - No of auxiliary members
+            - No of active members
+            - No of trial members 
+        - Meeting and Attendance: 
+            - No of meetings expected to be held
+            - No of meetings actually held 
+            - Average attendance per meeting 
+            - Reason for poor attendance
+        - Active works undertaken: [Home visitation, Hospital visitation, Prison visitation, Catechism instruction, Crowd contact, Care for children at Mass, Care for intermediate praesidium, Care for junior praesidium, Care for block rosary]
+            - No assigned 
+            - No done
+            - No of homes/patients/inmates visited, No of children cared for 
+            - No of active Catholics, inactive Catholics, separated brethren, muslims, unknowns, catechumen
+            - average number per meeting/Mass 
+        - Other works undertaken: [Sweeping the church, care fo penitents, visit to the blessed sacrament, friday midnight prayer, learning of legion prayers, hall arrangement, speaking to lukewarm members]
+        - Achievements recorded:
+            - No recruited into the legion 
+            - No baptized
+            - No confirmed
+            - No for first holy communion
+        - Plans for extension
+        - Attendance to legion functions: [Acies, May devotion, Edel Quinn Mass, AER, Mary's birthday, Officers' workshop, October devotion, Frank Duff Mass, Outdoor function, Exploratio Dominicalis, Legion Congress, Patrician meetings, AGR]
+        - Finance: 
+            - Income: 
+                - Amount brought forward from last report 
+                - SBC for the period [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+            - Expenditure: 
+                - To praesidium [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+                - Monthly remittance to Curia [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+                - Extension/visitation expenses [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+                - Report production
+        - Problems
+        - Comments/Remarks

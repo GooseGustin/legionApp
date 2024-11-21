@@ -8,6 +8,7 @@ class AnnouncementSerializer(serializers.ModelSerializer):
         fields = [
             'date', 
             'praesidium', 
+            'meeting_no',
             'no_present', 
             'officers_meeting_attendance',
             'officers_curia_attendance'
