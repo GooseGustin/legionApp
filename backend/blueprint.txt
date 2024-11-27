@@ -4,8 +4,8 @@ DESIGN
     - Legionary
         1. A Legionary is created with the creation of a new user 
         2. A Legionary can request for membership in a praesidium 
-        3. Legionaries can ask and answer questions
-        4. Legionaries can make prayer requests on the prayer wall
+        3. Legionaries can ask and answer Questions (to be created later)
+        4. Legionaries can make prayer requests on the prayer wall (to be created later)
         5. Legionaries can become curia and praesidia managers
 
     - Curia
@@ -25,19 +25,26 @@ DESIGN
             'vp_app_date', 'secretary', 'sec_app_date', 
             'treasurer', 'tres_app_date', 'managers', 'members',
             'membership_requests', 'next_report_deadline', 'created_at'
-        3. A Legionary can request to be a manager of a praesidium. Any manager can approve the request
+        3. A Legionary can request to be a manager of a praesidium. This puts them in a requests array (really just a many-to-many relationship with Legionaries). Any manager can approve the request and remove them from the array.
         4. Managers can edit the details of the praesidium, add meetings records, set reminders, create reports, set works, etc
-        5. Legionaries can request to be members of the praesidium. Membership will be approved by any existing manager
+        5. Legionaries can request to be members of the praesidium. Membership will be approved by any existing manager. Management requests are similar to membership requests
         6. Members can view praesidium details, meetings, reminders and reports, but not edit
+        7. Managers can view, created, edit, and delete objects. They can even remove members and other managers from the members and managers array (really just a many-to-many relationship with Legionaries). 
+        8. If a manager is removed from the members 'array', he is also removed from the managers 'array'. If just removed from the managers 'array', he remains a member. 
+        9. Legionaries can remove themselves from the members 'array'
+        10. Legionaries can be members and managers of multiple praesidia and curia
 
     - Work 
-        1. There should be a Work model for Meetings
-        2. There should be a WorkSummary model for Report generation
+        1. There should be a Work model for Meetings, ie, each work instance is associated with a meeting.
+        2. There should be a WorkSummary model for Report generation, ie, each report has an associated WorkSummary for the year/period of report 
         3. There should be a WorkList to save the types of work that the Praesidium carries out so that when the manager wants to record a Meeting, he can simply go to the types of work the praesidium does rather than the whole list of work types. This will be a field of the Praesidium model to be added when the Praesidium is created and can be edited or extended.
         4. Work model features: Type (char), Details (JSON), Active (bool), Done (bool). The details are going to be the metrics recorded for the particular work because different works might have different metrics, eg, for home visitation, the metrics would be name of hospital, number of patients, number of active catholics, number of inactive catholics, number of separated brethren, etc. The active field is to indicate whether or not the work is considered an active work. The done field is to indicate whether or not the assigned work was completed.
         5. WorkSummary model features: Type (char), Number assigned (int), Number done (int), Details (JSON). The details here will have the same key names as the works whose values are integers. Their values will be the sum of the work details' values.
-        6. WorkList (of Praesidium) will be a TextField
-        - When summarizing work in WorkSummary, consider using signals or scheduled tasks to automatically generate summaries after each meeting is recorded.
+        6. WorkList (of Praesidium) will be a TextField. It should be updated whenever a meeting is saved so that any additional works created will be saved and used to ease recording of the subsequent meetings.
+        # - When summarizing work in WorkSummary, consider using signals or scheduled tasks to automatically generate summaries after each meeting is recorded.
+        7. A praesidium's works, work summaries and lists can be seen by all members, but managed by managers. 
+
+    
 ______________________________________________
 PRICING PLANS
     - Free plan features: 

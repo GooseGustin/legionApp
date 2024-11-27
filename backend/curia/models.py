@@ -10,9 +10,9 @@ class Curia(models.Model):
     parish = models.CharField(max_length=100)
     spiritual_director = models.CharField(max_length=100)
     iden = models.CharField(max_length=20)
-    creator = models.ForeignKey(Legionary, on_delete=models.CASCADE)
+    creator = models.ForeignKey(Legionary, on_delete=models.CASCADE, related_name="curia_created")
     managers = models.ManyToManyField(Legionary)
-    management_requests = models.ManytoManyField(Legionary)
+    management_requests = models.ManyToManyField(Legionary, related_name="curia_management_requests")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

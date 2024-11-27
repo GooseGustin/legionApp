@@ -149,15 +149,27 @@ MEDIA_ROOT = path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         # "rest_framework.authentication.SessionAuthentication", 
+#         # "api.authentication.TokenAuthentication"
+#     ], 
+
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+#         # 'rest_framework.permissions.DjangoModelPermissions', 
+#     ],
+
+# }
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        # "rest_framework.authentication.SessionAuthentication", 
-        # "api.authentication.TokenAuthentication"
-    ], 
-
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-        # 'rest_framework.permissions.DjangoModelPermissions', 
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.DjangoModelPermissions',
     ],
-
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework.authentication.SessionAuthentication',
+    
+        
+    # ],
 }

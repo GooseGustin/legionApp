@@ -5,3 +5,6 @@ router = routers.DefaultRouter()
 router.register('legionaries', LegionaryViewSet)
 
 urlpatterns = router.urls 
+# urlpatterns = [
+    
+# ]
